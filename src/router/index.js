@@ -7,6 +7,7 @@ import DecksNew from "../views/DecksNew.vue";
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
+import UserShow from "../views/UserShow.vue";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/logout",
     name: "logout",
     component: Logout,
+  },
+  {
+    path: "/users/:id",
+    name: "user-show",
+    component: UserShow,
   },
 ];
 

@@ -13,6 +13,8 @@
     <router-link to="/login">Login</router-link>
     |
     <router-link to="/logout">Logout</router-link>
+    |
+    <router-link to="/users">My Decks</router-link>
   </div>
   <router-view />
 </template>
