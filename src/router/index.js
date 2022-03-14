@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import DecksIndex from "../views/DecksIndex.vue";
+import DecksShow from "../views/DecksShow.vue";
+import CardsIndex from "../views/CardsIndex.vue";
 
 const routes = [
   {
@@ -20,6 +22,16 @@ const routes = [
     path: "/decks",
     name: "decks-index",
     component: DecksIndex,
+  },
+  {
+    path: "/decks/:id",
+    name: "decks-show",
+    component: DecksShow,
+  },
+  {
+    path: "/cards",
+    name: "cards-index",
+    component: CardsIndex,
   },
 ];
 

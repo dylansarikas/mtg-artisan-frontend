@@ -5,6 +5,8 @@
     <router-link to="/about">About</router-link>
     |
     <router-link to="/decks">Decks</router-link>
+    |
+    <router-link to="/cards">Cards</router-link>
   </div>
   <router-view />
 </template>
