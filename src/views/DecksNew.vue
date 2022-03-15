@@ -12,10 +12,10 @@ export default {
   methods: {
     createDeck: function () {
       axios
-        .post("/decks", this.newdeckParams)
+        .post("/decks", this.newDeckParams)
         .then((response) => {
           console.log("decks create", response.data);
-          localStorage.setItem("flashMessage", "Recipe successfully created!");
+          // localStorage.setItem("flashMessage", "Deck successfully created!");
           this.$router.push("/decks");
         })
         .catch((error) => {
