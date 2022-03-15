@@ -1,3 +1,19 @@
+<script>
+export default {
+  data: function () {
+    return {
+      isLoggedIn: !!localStorage.jwt,
+    };
+  },
+  watch: {
+    $route: function () {
+      this.isLoggedIn = !!localStorage.jwt;
+    },
+  },
+  methods: {},
+};
+</script>
+
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link>
@@ -8,13 +24,13 @@
     |
     <router-link to="/decks/new">Deck Builder</router-link>
     |
-    <router-link to="/signup">Signup</router-link>
+    <router-link v-if="!isLoggedIn" to="/signup">Signup</router-link>
     |
-    <router-link to="/login">Login</router-link>
+    <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
     |
-    <router-link to="/logout">Logout</router-link>
+    <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
-    <router-link to="/users">My Decks</router-link>
+    <router-link v-if="isLoggedIn" to="/users">My Decks</router-link>
   </div>
   <router-view />
 </template>
