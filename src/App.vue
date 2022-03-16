@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
+    <router-link to="/">MTG Artisan</router-link>
     |
     <router-link to="/decks">Decks</router-link>
     |
@@ -30,7 +30,7 @@ export default {
     |
     <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
-    <router-link v-if="isLoggedIn" to="/users">My Decks</router-link>
+    <router-link v-if="isLoggedIn" to="/users/1">My Decks</router-link>
   </div>
   <router-view />
 </template>

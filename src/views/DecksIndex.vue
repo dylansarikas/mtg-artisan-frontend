@@ -27,7 +27,7 @@ export default {
       <router-link v-bind:to="`/decks/${deck.id}`">
         <h2>{{ deck.name }}</h2>
       </router-link>
-      <p>{{ deck.user_id.username }}</p>
+      <p>{{ deck.user_id }}</p>
     </div>
   </div>
 
