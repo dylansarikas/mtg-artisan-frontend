@@ -4,6 +4,7 @@ export default {
   data: function () {
     return {
       decks: [],
+      nameFilter: "",
     };
   },
   created: function () {
@@ -17,11 +18,35 @@ export default {
       });
     },
   },
+  computed: {
+    filteredDecks: function () {
+      return this.decks.filter((deck) => {
+        return deck.name.toLowerCase().includes(this.nameFilter.toLowerCase());
+      });
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="decks-index">
+  <h1>Newest Decks</h1>
+  <p>
+    Deck Name Search:
+    <input type="text" v-model="nameFilter" list="deckNames" />
+  </p>
+  <datalist id="deckNames">
+    <option v-for="deck in decks" v-bind:key="deck.id">
+      {{ deck.name }}
+    </option>
+  </datalist>
+  <div v-for="deck in filteredDecks" v-bind:key="deck.id">
+    <router-link v-bind:to="`/decks/${deck.id}`">
+      <h2>{{ deck.name }}</h2>
+      <p>{{ deck.user.username }}</p>
+    </router-link>
+  </div>
+
+  <!-- <div class="decks-index">
     <h1>Newest Decks</h1>
     <div v-for="deck in decks" v-bind:key="deck.id">
       <router-link v-bind:to="`/decks/${deck.id}`">
@@ -29,7 +54,7 @@ export default {
       </router-link>
       <p>{{ deck.user_id }}</p>
     </div>
-  </div>
+  </div> -->
 
   <!-- <div class="row row-cols-2 row-cols-md-4 g-4">
     <div class="col" v-for="deck in decks" v-bind:key="deck.id">

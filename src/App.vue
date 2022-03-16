@@ -10,7 +10,11 @@ export default {
       this.isLoggedIn = !!localStorage.jwt;
     },
   },
-  methods: {},
+  methods: {
+    findUserId: function () {
+      return localStorage.user_id;
+    },
+  },
 };
 </script>
 
@@ -30,7 +34,7 @@ export default {
     |
     <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
-    <router-link v-if="isLoggedIn" to="/users/1">My Decks</router-link>
+    <router-link v-if="isLoggedIn" :to="`/users/${findUserId()}`">My Decks</router-link>
   </div>
   <router-view />
 </template>
