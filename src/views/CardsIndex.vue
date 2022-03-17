@@ -6,6 +6,7 @@ export default {
       cards: [],
       errors: [],
       cardSearch: "",
+      cardImage: "",
     };
   },
   created: function () {
@@ -19,6 +20,7 @@ export default {
           console.log("cards index", response);
           this.cards = response.data;
           this.cardSearch = "";
+          this.cardImage = response.data["image_uris"]["small"];
         })
         .catch((error) => {
           console.log("card index error", error.response);
@@ -40,7 +42,10 @@ export default {
       <input type="text" v-model="cardSearch" />
       <input type="submit" value="Search" />
     </form>
-    <div>
+    <div v-if="!!cards['name']">
+      <p>{{ cards["name"] }}</p>
+      <p>{{ cards["image_uris"]["small"] }}</p>
+      <img v-bind:src="cardImage" class="card-img-top" alt="" />
       <p>{{ cards }}</p>
     </div>
   </div>
