@@ -11,6 +11,8 @@ export default {
       // cardSearch: "",
       // cardImage: "",
       newCardParams: {},
+      amount: 1,
+      multiverse: 1,
     };
   },
   created: function () {
@@ -21,14 +23,17 @@ export default {
   },
   methods: {
     createCardDeck: function () {
+      console.log(this.cards[0]);
       this.newCardDeckParams["deck_id"] = this.$route.params.id;
-      this.newCardDeckParams["multiverse_id"] = this.cards["multiverse_ids"][0];
-      this.newCardDeckParams["amount"] = 4;
+      // this.newCardDeckParams["multiverse_id"] = this.cards["multiverse_ids"][0];
+      this.newCardDeckParams["multiverse_id"] = this.multiverse;
+      this.newCardDeckParams["amount"] = this.amount;
       // console.log(this.newCardDeckParams);
       axios
         .post("/card_decks", this.newCardDeckParams)
         .then((response) => {
           console.log("cardDeck create", response.data);
+          // this deck push blah
         })
         .catch((error) => {
           console.log("cardDeck create error", error.response);
@@ -85,7 +90,17 @@ export default {
       </div>
       <div>
         <label for="cardColor">Card Color:</label>
-        <input type="text" id="cardColor" v-model="newCardParams.cardColor" />
+        <input type="radio" id="white" value="white" v-model="newCardParams.cardColor" />
+        <label for="white">White</label>
+        <input type="radio" id="blue" value="blue" v-model="newCardParams.cardColor" />
+        <label for="blue">Blue</label>
+        <input type="radio" id="black" value="black" v-model="newCardParams.cardColor" />
+        <label for="black">Black</label>
+        <input type="radio" id="red" value="red" v-model="newCardParams.cardColor" />
+        <label for="red">Red</label>
+        <input type="radio" id="green" value="green" v-model="newCardParams.cardColor" />
+        <label for="green">Green</label>
+        <!-- <span>Picked: {{ picked }}</span> -->
       </div>
       <div>
         <label for="cardText">Card Text:</label>
@@ -98,25 +113,59 @@ export default {
       <input type="submit" value="Submit" />
     </form>
     <div v-if="!!cards[0]">
-      <div v-if="!!cards[0]['name']">
+      <div v-if="!!cards[0]['multiverse_ids'][0]">
         <div v-for="card in cards" v-bind:key="card.id">
-          <p>{{ card["name"] }}</p>
-          <img v-bind:src="`${card['image_uris']['small']}`" class="card-img-top" alt="" />
+          <div v-if="!!card['image_uris']">
+            <p>{{ card["name"] }}</p>
+            <img v-bind:src="`${card['image_uris']['small']}`" class="card-img-top" alt="" />
+            <div class="cardDecks-new">
+              <form v-on:submit.prevent="createCardDeck()">
+                <ul>
+                  <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                </ul>
+                <div v-if="!!cards[0]">
+                  <div v-if="!!cards[0]['name']">
+                    Click Here to Add Card
+                    <input type="submit" value="Add" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div v-else-if="!!card['card_faces']">
+            <p>{{ card["name"] }}</p>
+            <img v-bind:src="`${card['card_faces'][0]['image_uris']['small']}`" class="card-img-top" alt="" />
+            <img v-bind:src="`${card['card_faces'][1]['image_uris']['small']}`" class="card-img-top" alt="" />
+            <div class="cardDecks-new">
+              <form v-on:submit.prevent="createCardDeck()">
+                <ul>
+                  <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                </ul>
+                <div v-if="!!cards[0]">
+                  <div v-if="!!cards[0]['name']">
+                    <label for="cardAmount">Add Copies</label>
+                    <input type="text" id="cardAmount" v-model="amount" />
+                    <input type="submit" value="Add" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="cardDecks-new">
-    <form v-on:submit.prevent="createCardDeck()">
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div v-if="!!cards[0]">
-        <div v-if="!!cards[0]['name']">
-          Click Here to Add Card
-          <input type="submit" value="Add" />
+    <!-- <div class="cardDecks-new">
+      <form v-on:submit.prevent="createCardDeck()">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+        </ul>
+        <div v-if="!!cards[0]">
+          <div v-if="!!cards[0]['name']">
+            Click Here to Add Card
+            <input type="submit" value="Add" />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div> -->
   </div>
 </template>

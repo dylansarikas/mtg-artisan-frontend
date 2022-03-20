@@ -33,7 +33,8 @@ export default {
       <router-link v-bind:to="`/decks/${recentDeck.id}`">
         <h2>{{ recentDeck.name }}</h2>
       </router-link>
-      <p>{{ recentDeck.user_id }}</p>
+      <p>{{ recentDeck.user.username }}</p>
+      <img v-bind:src="`${recentDeck.first_card['image']}`" class="card-img-top" alt="" />
     </div>
   </div>
 </template>

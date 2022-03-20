@@ -30,7 +30,7 @@ export default {
           console.log("cards index", response);
           // console.log(response.data.data[0]["image_uris"]["small"]);
           this.cards = response.data.data;
-          console.log(this.cards[0]["name"]);
+          console.log(this.cards[0]["multiverse_ids"][0]);
           // this.cardSearch = "";
           // this.cardImage = response.data["image_uris"]["small"];
         })
@@ -79,10 +79,17 @@ export default {
       <input type="submit" value="Submit" />
     </form>
     <div v-if="!!cards[0]">
-      <div v-if="!!cards[0]['name']">
+      <div v-if="!!cards[0]['multiverse_ids'][0]">
         <div v-for="card in cards" v-bind:key="card.id">
-          <p>{{ card["name"] }}</p>
-          <img v-bind:src="`${card['image_uris']['small']}`" class="card-img-top" alt="" />
+          <div v-if="!!card['image_uris']">
+            <p>{{ card["name"] }}</p>
+            <img v-bind:src="`${card['image_uris']['small']}`" class="card-img-top" alt="" />
+          </div>
+          <div v-else-if="!!card['card_faces']">
+            <p>{{ card["name"] }}</p>
+            <img v-bind:src="`${card['card_faces'][0]['image_uris']['small']}`" class="card-img-top" alt="" />
+            <img v-bind:src="`${card['card_faces'][1]['image_uris']['small']}`" class="card-img-top" alt="" />
+          </div>
         </div>
       </div>
     </div>

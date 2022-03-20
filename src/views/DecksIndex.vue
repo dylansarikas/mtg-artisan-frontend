@@ -42,8 +42,10 @@ export default {
   <div v-for="deck in filteredDecks" v-bind:key="deck.id">
     <router-link v-bind:to="`/decks/${deck.id}`">
       <h2>{{ deck.name }}</h2>
-      <p>{{ deck.user.username }}</p>
     </router-link>
+    <p>{{ deck.user.username }}</p>
+    <!-- <p>{{ deck.first_card }}</p> -->
+    <img v-bind:src="`${deck.first_card['image']}`" class="card-img-top" alt="" />
   </div>
 
   <!-- <div class="decks-index">
