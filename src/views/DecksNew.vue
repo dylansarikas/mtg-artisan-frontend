@@ -16,7 +16,7 @@ export default {
         .then((response) => {
           console.log("decks create", response.data);
           // localStorage.setItem("flashMessage", "Deck successfully created!");
-          this.$router.push("/decks");
+          this.$router.push(`/users/${response.data.user.id}`);
         })
         .catch((error) => {
           console.log("decks create error", error.response);

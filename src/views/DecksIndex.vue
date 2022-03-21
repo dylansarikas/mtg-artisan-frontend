@@ -43,7 +43,9 @@ export default {
     <router-link v-bind:to="`/decks/${deck.id}`">
       <h2>{{ deck.name }}</h2>
     </router-link>
-    <p>{{ deck.user.username }}</p>
+    <router-link v-bind:to="`/users/${deck.user.id}`">
+      <p>{{ deck.user.username }}</p>
+    </router-link>
     <!-- <p>{{ deck.first_card }}</p> -->
     <img v-bind:src="`${deck.first_card['image']}`" class="card-img-top" alt="" />
   </div>

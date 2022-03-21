@@ -12,7 +12,6 @@ export default {
       // cardImage: "",
       newCardParams: {},
       amount: 1,
-      multiverse: 1,
     };
   },
   created: function () {
@@ -22,18 +21,19 @@ export default {
     });
   },
   methods: {
-    createCardDeck: function () {
-      console.log(this.cards[0]);
+    createCardDeck: function (card) {
+      //console.log(this.cards[0]);
       this.newCardDeckParams["deck_id"] = this.$route.params.id;
-      // this.newCardDeckParams["multiverse_id"] = this.cards["multiverse_ids"][0];
-      this.newCardDeckParams["multiverse_id"] = this.multiverse;
-      this.newCardDeckParams["amount"] = this.amount;
+      this.newCardDeckParams["multiverse_id"] = card.multiverse_ids[0];
+      this.newCardDeckParams["amount"] = parseInt(this.amount);
       // console.log(this.newCardDeckParams);
       axios
         .post("/card_decks", this.newCardDeckParams)
         .then((response) => {
           console.log("cardDeck create", response.data);
+          console.log(card);
           // this deck push blah
+          //this.deck["card_decks"].push(card);
         })
         .catch((error) => {
           console.log("cardDeck create error", error.response);
@@ -119,13 +119,14 @@ export default {
             <p>{{ card["name"] }}</p>
             <img v-bind:src="`${card['image_uris']['small']}`" class="card-img-top" alt="" />
             <div class="cardDecks-new">
-              <form v-on:submit.prevent="createCardDeck()">
+              <form v-on:submit.prevent="createCardDeck(card)">
                 <ul>
                   <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
                 </ul>
                 <div v-if="!!cards[0]">
                   <div v-if="!!cards[0]['name']">
-                    Click Here to Add Card
+                    <label for="cardAmount">Add Copies</label>
+                    <input type="text" id="cardAmount" v-model="amount" />
                     <input type="submit" value="Add" />
                   </div>
                 </div>
@@ -137,7 +138,7 @@ export default {
             <img v-bind:src="`${card['card_faces'][0]['image_uris']['small']}`" class="card-img-top" alt="" />
             <img v-bind:src="`${card['card_faces'][1]['image_uris']['small']}`" class="card-img-top" alt="" />
             <div class="cardDecks-new">
-              <form v-on:submit.prevent="createCardDeck()">
+              <form v-on:submit.prevent="createCardDeck(card)">
                 <ul>
                   <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
                 </ul>
