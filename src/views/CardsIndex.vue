@@ -136,20 +136,132 @@ export default {
                         aria-expanded="true"
                         aria-controls="collapsetwo"
                       >
-                        FEATURES
+                        Card Search
                         <i class="feather-chevron-down float-right"></i>
                       </a>
                     </h6>
                   </div>
+                  <!-- <form v-on:submit.prevent="indexCards()">
+                    <ul>
+                      <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                    </ul>
+                    <div>
+                      <label for="cardName">Card Name:</label>
+                      <input type="text" id="cardName" v-model="newCardSearch.cardName" />
+                    </div>
+                    <div>
+                      <label for="cardColor">Card Color:</label>
+                      <input type="radio" id="white" value="white" v-model="newCardSearch.cardColor" />
+                      <label for="white">White</label>
+                      <input type="radio" id="blue" value="blue" v-model="newCardSearch.cardColor" />
+                      <label for="blue">Blue</label>
+                      <input type="radio" id="black" value="black" v-model="newCardSearch.cardColor" />
+                      <label for="black">Black</label>
+                      <input type="radio" id="red" value="red" v-model="newCardSearch.cardColor" />
+                      <label for="red">Red</label>
+                      <input type="radio" id="green" value="green" v-model="newCardSearch.cardColor" />
+                      <label for="green">Green</label>
+                    </div>
+                    <div>
+                      <label for="cardText">Card Text:</label>
+                      <input type="text" id="cardText" v-model="newCardSearch.cardText" />
+                    </div>
+                    <div>
+                      <label for="cardType">Card Type:</label>
+                      <input type="text" id="cardType" v-model="newCardSearch.cardType" />
+                    </div>
+                    <input type="submit" value="Submit" />
+                  </form> -->
                   <div id="collapsetwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="filters-card-body card-shop-filters">
-                      <form class="filters-search mb-3">
+                      <form class="filters-search mb-3" v-on:submit.prevent="indexCards()">
                         <div class="form-group">
                           <i class="feather-search"></i>
-                          <input type="text" class="form-control" placeholder="Search" />
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Card Name"
+                            v-model="newCardSearch.cardName"
+                          />
                         </div>
+                        <div class="form-group">
+                          <i class="feather-search"></i>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Oracle Text"
+                            v-model="newCardSearch.cardText"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <i class="feather-search"></i>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Card Type"
+                            v-model="newCardSearch.cardType"
+                          />
+                        </div>
+                        Card Color
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios1"
+                            value="white"
+                            v-model="newCardSearch.cardColor"
+                          />
+                          <label class="form-check-label" for="exampleRadios1">White</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios2"
+                            value="blue"
+                            v-model="newCardSearch.cardColor"
+                          />
+                          <label class="form-check-label" for="exampleRadios2">Blue</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios3"
+                            value="rlack"
+                            v-model="newCardSearch.cardColor"
+                          />
+                          <label class="form-check-label" for="exampleRadios3">Black</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios4"
+                            value="red"
+                            v-model="newCardSearch.cardColor"
+                          />
+                          <label class="form-check-label" for="exampleRadios4">Red</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios5"
+                            value="green"
+                            v-model="newCardSearch.cardColor"
+                          />
+                          <label class="form-check-label" for="exampleRadios5">Green</label>
+                        </div>
+                        <br />
+                        <button class="btn btn-outline-primary" type="submit">Submit</button>
                       </form>
-                      <div class="custom-control custom-checkbox">
+                      <!-- <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="cb6" />
                         <label class="custom-control-label" for="cb6">Controller Support</label>
                       </div>
@@ -169,7 +281,7 @@ export default {
                         <input type="checkbox" class="custom-control-input" id="cb10" />
                         <label class="custom-control-label" for="cb10">Windows</label>
                       </div>
-                      <div class="mt-2"><a href="#" class="link">See all</a></div>
+                      <div class="mt-2"><a href="#" class="link">See all</a></div> -->
                     </div>
                   </div>
                 </div>
@@ -266,7 +378,7 @@ export default {
     </div>
   </section>
 
-  <div class="cards-search-index">
+  <!-- <div class="cards-search-index">
     <h1>Search for a Card</h1>
     <form v-on:submit.prevent="indexCards()">
       <ul>
@@ -288,7 +400,6 @@ export default {
         <label for="red">Red</label>
         <input type="radio" id="green" value="green" v-model="newCardSearch.cardColor" />
         <label for="green">Green</label>
-        <!-- <span>Picked: {{ picked }}</span> -->
       </div>
       <div>
         <label for="cardText">Card Text:</label>
@@ -300,7 +411,7 @@ export default {
       </div>
       <input type="submit" value="Submit" />
     </form>
-    <!-- <div v-if="!!cards[0]">
+    <div v-if="!!cards[0]">
       <div v-if="!!cards[0]['multiverse_ids'][0]">
         <div v-for="card in cards" v-bind:key="card.id">
           <div v-if="!!card['image_uris']">
@@ -314,8 +425,8 @@ export default {
           </div>
         </div>
       </div>
-    </div> -->
-  </div>
+    </div>
+  </div> -->
 
   <!-- <div class="cards-index">
     <h1>Fuzzy Search for a Card</h1>
