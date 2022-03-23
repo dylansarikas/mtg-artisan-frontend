@@ -12,15 +12,19 @@ export default {
       // cardImage: "",
       newCardParams: {},
       amount: 1,
+      hover: false,
     };
   },
   created: function () {
-    axios.get("/decks/" + this.$route.params.id).then((response) => {
-      console.log("decks show", response);
-      this.deck = response.data;
-    });
+    this.showDeck();
   },
   methods: {
+    showDeck: function () {
+      axios.get("/decks/" + this.$route.params.id).then((response) => {
+        console.log("decks show", response);
+        this.deck = response.data;
+      });
+    },
     createCardDeck: function (card) {
       //console.log(this.cards[0]);
       this.newCardDeckParams["deck_id"] = this.$route.params.id;
@@ -30,10 +34,23 @@ export default {
       axios
         .post("/card_decks", this.newCardDeckParams)
         .then((response) => {
-          console.log("cardDeck create", response.data);
+          console.log("cardDeck create", response);
           console.log(card);
           // this deck push blah
-          //this.deck["card_decks"].push(card);
+          // this.deck["card_decks"].push(card);
+          this.showDeck();
+        })
+        .catch((error) => {
+          console.log("cardDeck create error", error.response);
+          // this.errors = error.response.data.errors;
+        });
+    },
+    destroyCardDecks: function (card) {
+      axios
+        .delete("/card_decks/" + card.id)
+        .then((response) => {
+          console.log("cardDeck destroy", response.data);
+          this.showDeck();
         })
         .catch((error) => {
           console.log("cardDeck create error", error.response);
@@ -68,9 +85,19 @@ export default {
 </script>
 
 <template>
+  <!-- <h2>{{ deck.name }}</h2>
+  <div v-for="card_deck in deck.card_decks" v-bind:key="card_deck.id">
+    <span class="container">
+      <p class="hover-text">{{ `${card_deck["card"]["name"]}: ${card_deck["amount"]}` }}</p>
+      <img class="manImg" img v-bind:src="`${card_deck['card']['image']}`" />
+    </span>
+  </div> -->
   <section class="py-5 store-page">
     <div id="Collapse" class="pb-5 mb-5 border-bottom">
       <h2 class="h5">{{ deck.name }}</h2>
+      <router-link v-bind:to="`/users/${deck.user.id}`">
+        <h5>{{ deck.user.username }}</h5>
+      </router-link>
       <p>
         <a
           class="btn btn-primary"
@@ -95,10 +122,48 @@ export default {
       </p>
       <div class="collapse" id="collapseExample">
         <div class="card card-body" v-for="card_deck in deck.card_decks" v-bind:key="card_deck.id">
-          <p>{{ `${card_deck["card"]["name"]}: ${card_deck["amount"]}` }}</p>
+          <span class="container">
+            <p class="hover-text">{{ `${card_deck["card"]["name"]}: ${card_deck["amount"]}` }}</p>
+            <img class="manImg" img v-bind:src="`${card_deck['card']['image']}`" />
+          </span>
+          <br />
+          <!-- <p>{{ `${card_deck["card"]["name"]}: ${card_deck["amount"]}` }}</p> -->
+          <div id="Buttons" v-if="deck.owner">
+            <button type="button" class="btn btn-outline-danger" v-on:click="destroyCardDecks(card_deck)">
+              Delete
+            </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModalLong">
+              Update
+            </button>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModalLong"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLongTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">...</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <hr />
       <!-- <p>
         <a
           class="btn btn-primary"
@@ -228,8 +293,8 @@ export default {
         </div>
       </div> -->
     </div>
-    <div class="container">
-      <div class="d-flex align-item-center title mb-3">
+    <div v-if="deck.owner" class="container">
+      <!-- <div class="d-flex align-item-center title mb-3">
         <h5 class="m-0 font-weight-normal">
           All Stores -
           <span class="text-white-50">3445</span>
@@ -253,7 +318,7 @@ export default {
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-lg-3">
           <div class="filters rounded mb-4">
@@ -589,9 +654,9 @@ export default {
                 <!-- </a> -->
               </div>
             </div>
-            <div class="col-lg-12 text-center">
+            <!-- <div class="col-lg-12 text-center">
               <a href="#" class="btn btn-light btn-lg">Load More</a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -682,3 +747,15 @@ export default {
     </div>
   </div> -->
 </template>
+
+<style>
+.container {
+  display: inline-block;
+}
+.manImg {
+  display: none;
+}
+.hover-text:hover ~ .manImg {
+  display: block;
+}
+</style>

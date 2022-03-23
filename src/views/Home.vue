@@ -3,7 +3,6 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Welcome to MTG Artisan",
       decks: [],
       recentDecks: [],
     };
@@ -24,13 +23,16 @@ export default {
 </script>
 
 <template>
-  <div class="home">
-    <h1>{{ message }}</h1>
+  <div class="card text-white bg-dark mb-3">
+    <div class="card-body">
+      <h2 class="card-title">Welcome to MTG Artisan</h2>
+      <h4 class="card-text text-white">Artisan is a Magic: The Gathering Format using only Commons and Uncommons</h4>
+    </div>
   </div>
   <div class="decks-index">
     <section class="py-5 store-page">
       <div class="container">
-        <div class="d-flex align-item-center title mb-3">
+        <!-- <div class="d-flex align-item-center title mb-3">
           <h5 class="m-0 font-weight-normal">
             All Stores -
             <span class="text-white-50">3445</span>
@@ -54,10 +56,10 @@ export default {
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col-lg-3">
-            <div class="filters rounded mb-4">
+            <!-- <div class="filters rounded mb-4">
               <div class="filters-header border-bottom pb-4">
                 <h6 class="m-0">Filter By</h6>
               </div>
@@ -206,7 +208,7 @@ export default {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE -->
           <div class="col-lg-9">
@@ -227,9 +229,9 @@ export default {
                   </router-link>
                 </div>
               </div>
-              <div class="col-lg-12 text-center">
+              <!-- <div class="col-lg-12 text-center">
                 <a href="#" class="btn btn-light btn-lg">Load More</a>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE BOXES HERE -->

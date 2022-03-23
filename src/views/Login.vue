@@ -36,7 +36,7 @@ export default {
         <div class="col-lg-5 mx-auto">
           <div class="osahan-login p-5 bg-dark">
             <div class="text-center mb-4">
-              <a href="index.html"><img src="img/logo.svg" alt="" /></a>
+              <a href="index.html"><img src="/img/logo.svg" alt="" /></a>
               <h5 class="font-weight-bold mt-3">Welcome Back</h5>
               <p class="text-white-50">An Uncommon Experience</p>
             </div>
