@@ -251,7 +251,7 @@ export default {
     </div>
   </section>
 
-  <h1>Newest Decks</h1>
+  <!-- <h1>Newest Decks</h1>
   <p>
     Deck Name Search:
     <input type="text" v-model="nameFilter" list="deckNames" />
@@ -268,7 +268,7 @@ export default {
     <router-link v-bind:to="`/users/${deck.user.id}`">
       <p>{{ deck.user.username }}</p>
     </router-link>
-    <!-- <p>{{ deck.first_card }}</p> -->
+    <p>{{ deck.first_card }}</p>
     <img v-bind:src="`${deck.first_card['image']}`" class="card-img-top" alt="" />
-  </div>
+  </div> -->
 </template>

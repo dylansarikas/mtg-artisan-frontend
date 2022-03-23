@@ -342,7 +342,7 @@ export default {
               <div class="osahan-card">
                 <!-- <a href="store-single.html"> -->
                 <div v-if="!!card['image_uris']">
-                  <img class="img-fluid" img v-bind:src="`${card['image_uris']['small']}`" alt="" />
+                  <img class="img-fluid" img v-bind:src="`${card['image_uris']['normal']}`" alt="" />
                   <div class="osahan-card-body mt-3">
                     <h6 class="text-white mb-1">{{ card["name"] }}</h6>
                     <!-- <p class="mb-0 text-white-50">Free Now - Jun 25 at 08:30 PM</p> -->
@@ -354,7 +354,7 @@ export default {
                   </div>
                 </div>
                 <div v-else-if="!!card['card_faces']">
-                  <img class="img-fluid" img v-bind:src="`${card['card_faces'][0]['image_uris']['small']}`" alt="" />
+                  <img class="img-fluid" img v-bind:src="`${card['card_faces'][0]['image_uris']['normal']}`" alt="" />
                   <div class="osahan-card-body mt-3">
                     <h6 class="text-white mb-1">{{ card["name"] }}</h6>
                     <!-- <p class="mb-0 text-white-50">Free Now - Jun 25 at 08:30 PM</p> -->
