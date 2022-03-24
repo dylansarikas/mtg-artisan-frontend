@@ -1,4 +1,5 @@
 <script>
+/* global bootstrap */
 import axios from "axios";
 export default {
   data: function () {
@@ -12,6 +13,7 @@ export default {
       // cardImage: "",
       newCardParams: {},
       amount: 1,
+      updateAmount: {},
       hover: false,
     };
   },
@@ -38,6 +40,22 @@ export default {
           console.log(card);
           // this deck push blah
           // this.deck["card_decks"].push(card);
+          this.showDeck();
+        })
+        .catch((error) => {
+          console.log("cardDeck create error", error.response);
+          // this.errors = error.response.data.errors;
+        });
+    },
+    updateCardDeck: function (card) {
+      this.updateAmount["amount"] = parseInt(this.amount);
+      axios
+        .patch("/card_decks/" + card.id, this.updateAmount)
+        .then((response) => {
+          console.log("cardDeck create", response);
+          console.log(card);
+          var updateCardDeckAmount = bootstrap.Modal.getInstance(document.getElementById("updateCardDeckAmount")); // Returns a Bootstrap modal instance
+          updateCardDeckAmount.hide();
           this.showDeck();
         })
         .catch((error) => {
@@ -133,13 +151,18 @@ export default {
               Delete
             </button>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModalLong">
+            <button
+              type="button"
+              class="btn btn-outline-warning"
+              data-toggle="modal"
+              data-target="#updateCardDeckAmount"
+            >
               Update
             </button>
             <!-- Modal -->
             <div
               class="modal fade"
-              id="exampleModalLong"
+              id="updateCardDeckAmount"
               tabindex="-1"
               role="dialog"
               aria-labelledby="exampleModalLongTitle"
@@ -148,19 +171,47 @@ export default {
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Card Amount</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">...</div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                  <div class="modal-body">
+                    <form v-on:submit.prevent="updateCardDeck(card_deck)">
+                      <ul>
+                        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                      </ul>
+                      <div>
+                        <input type="number" v-model="amount" />
+                      </div>
+                      <button class="btn btn-outline-primary" type="submit">Submit</button>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- <form v-on:submit.prevent="createCardDeck(card)">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div v-if="!!cards[0]">
+                <div v-if="!!cards[0]['name']">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Amount"
+                      aria-label="Amount"
+                      aria-describedby="button-addon2"
+                      v-model="amount"
+                    />
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form> -->
           </div>
         </div>
       </div>
