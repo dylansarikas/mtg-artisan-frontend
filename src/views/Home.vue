@@ -31,6 +31,7 @@ export default {
   </div>
   <div class="decks-index">
     <section class="py-5 store-page">
+      <h5 class="card-text text-white">8 Recent Decks</h5>
       <div class="container">
         <!-- <div class="d-flex align-item-center title mb-3">
           <h5 class="m-0 font-weight-normal">

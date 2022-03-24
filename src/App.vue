@@ -22,7 +22,7 @@ export default {
   <!-- Navigation -->
   <nav class="navbar navbar-expand navbar-dark bg-dark osahan-nav-top p-0 px-2 sticky-top">
     <div class="container">
-      <router-link class="navbar-brand mr-2" to="/"><img src="/img/logo.svg" alt="" /></router-link>
+      <router-link class="navbar-brand mr-2" to="/"><img src="/img/artisan.png" alt="" /></router-link>
       <!-- <router-link to="/">MTG Artisan</router-link> -->
       <!-- <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">

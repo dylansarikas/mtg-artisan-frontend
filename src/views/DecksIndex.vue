@@ -32,7 +32,7 @@ export default {
   <section class="py-5 store-page">
     <div class="container">
       <div class="d-flex align-item-center title mb-3">
-        <h5 class="m-0 font-weight-normal">
+        <!-- <h5 class="m-0 font-weight-normal">
           All Stores -
           <span class="text-white-50">3445</span>
         </h5>
@@ -54,13 +54,13 @@ export default {
               <button class="dropdown-item" type="button">Alphabetical</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="col-lg-3">
           <div class="filters rounded mb-4">
             <div class="filters-header border-bottom pb-4">
-              <h6 class="m-0">Filter By</h6>
+              <h6 class="m-0">All Decks</h6>
             </div>
             <div class="filters-body">
               <div id="accordion">
